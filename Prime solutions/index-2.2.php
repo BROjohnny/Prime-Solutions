@@ -2,38 +2,36 @@
 $conn=mysqli_connect("localhost","root","","login");
 $error="";
 if(isset($_POST['submit'])){
-  if( $_POST['pwd']!=$_POST['confpwd']){
-    $error="Not match the passwords. please try again.";
-  }
-  else{
     $username=$_POST['uname'];
     $password=$_POST['pwd'];
-    $confpassword=$_POST['confpwd'];
-    $email=$_POST['email'];
-    $firstname=$_POST['first'];
-    $lastname=$_POST['last'];
+    $newspaper=$_POST['news'];
+    $magazine=$_POST['mag'];
+    $address=$_POST['address'];
+    $province=$_POST['province'];
+    $city=$_POST['city'];
+    $phone=$_POST['phone'];
     $hashed_password=sha1($password);
-    $sql="INSERT INTO signup (Username,Password,Email,First_name,Last_name) VALUES('$username','$hashed_password','$email','$firstname','$lastname') ";
+    $sql="INSERT INTO subscribe (Username,Password,Newspaper,Magazine,Address,Province,City,Phone) VALUES('$username','$hashed_password','$newspaper','$magazine','$address','$province','$city','$phone') ";
     mysqli_query($conn,$sql);
-    $error="sign up successfully";
-    } 
+    
+
+
+    $error=" subscribe successfully";
+  
   }
   if(isset($_POST['cancel'])){
-      $error="sign up cancelled";
+    $error="cancelled";
   }
 
-?>
+ ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>NewsFlash - Sign Up</title>
+<title>NewsFlash - Subscribes</title>
 <meta http-equiv="Content-Style-Type" content="text/css">
 <LINK HREF="style.css" TYPE="text/css" REL="stylesheet">
-<style>
-.error{
-  font-size: 20px;
-}
-.account{font-size: 25px;}
+<style type="text/css">
+  .error{font-size: 20px;}
 </style>
 </head>
 <body>
@@ -70,71 +68,127 @@ if(isset($_POST['submit'])){
 <table width="1000" height="100" border="0" cellspacing="0" cellpadding="0">
   <tr>
      <td width="620" height="100" valign="top"><div class="blok">
-       <p><span class="name">Sign Up for new users </span><br>
+       <p><span class="name">New Subscription </span><br>
              <img src="images/line.jpg" class="line" width="620" height="2"><br>
          </p>
+         <form action="index-2.2.php" method="POST">
        <table>
-      <form action="signup.php" method="POST">
        <tbody>
-        
-         <tr>
-           <td align="right">*Username :</td>
-           <td><input type="text" name="uname" style="width:240px;" required></td>
+        <tr>
+           <td align="right">*user name : </td>
+           <td>
+             <label>
+               <input type="text" name="uname" style="width:240px;" required>
+               </label>           </td>
          </tr>
          <tr>
-           <td align="right">*Password:</td>
-           <td><input type="password" name="pwd" style="width:240px;" required></td>
+           <td align="right">*password : </td>
+           <td>
+             <label>
+               <input type="password" name="pwd" style="width:240px;" required>
+               </label>           </td>
          </tr>
          <tr>
-           <td align="right">*Confirm Password:</td>
-           <td><input type="password" name="confpwd" style="width:240px;" required></td>
+           <td align="right">*Newspaper </td>
+           <td><select name="news" style="width:240px;" required>
+              <option>The New York Times</option>
+			  <option>Hindustan Times</option>
+              <option>USA Today</option>
+			  <option>Daily Mail</option>
+              <option>Daily Mirror</option>
+			  <option>The Economist Times</option>
+              <option>The Sun</option>
+			  
+              <option selected>None</option>
+			  
+          </select>&nbsp;</td>
+         </tr>
+
+         <tr>
+           <td align="right">*Magazine</td>
+           <td><select name="mag" style="width:240px;" required>
+                <option>The Economist</option>
+                <option>Brides of Srilanka</option>
+                <option>Vogue</option>
+                <option>InStyle</option>
+                <option>BusinessWeek</option>
+                <option>CookingLight</option>
+                <option>People</option>
+                <option selected>None</option>
+              </select>                &nbsp;&nbsp;</td>
          </tr>
          <tr>
-           <td>*E-mail :</td>
-           <td><input type="text" name="email" style="width:240px;" required></td>
+           <td align="right">*Address : </td>
+           <td><label>
+             <textarea name="address" style="width:240px;" required></textarea>
+             </label>           </td>
          </tr>
          <tr>
-           <td align="right">*First Name:</td>
-           <td><input type="text" name="first" style="width:240px;" required></td>
+           <td height="32" align="right">*Province : </td>
+           <td><label>
+             <input type="text" name="province" style="width:240px;" required>
+             </label></td>
+         </tr>
+         <tr>
+           <td align="right">*City : </td>
+           <td>
+             <label>
+               <input type="text" name="city" style="width:240px;" required>
+               </label>           </td>
+         </tr>
+         <tr>
+           <td align="right">*Phone:</td>
+           <td><input type="number"  name="phone" style="width:240px;" required></td>
          </tr>
          <tr>
            
-         <tr>
-           <td align="right">*Last Name:</td>
-           <td><input type="text" name="last" style="width:240px;" required></td>
-         </tr>
-
+           
          <tr>
            <td colspan="2">&nbsp;</td>
          </tr>
          <tr>
            <td colspan="2" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
-               <label></label>
-             <input name="submit" type="submit" style="padding:0px 10px;" value="Submit">
-             <input type="submit" name="cancel" value="Cancel"></td>
+               <label>
+               <input type="submit" name="cancel" value="Cancel">
+                 </label>
+             <input name="submit" type="submit" style="padding:0px 10px;" value="Submit"></td>
          </tr>
-        
          <tr>
            <td align="left" colspan="2">&nbsp;</td>
          </tr>
-         
+         <tr>
+           <td colspan="2">&nbsp;</td>
+         </tr>
+         <tr>
+           <td align="right">     
+           <td align="right">&nbsp;</td>
+         </tr>
        </tbody>
-     </form>
-    
      </table>
-      <div style="color:red;" class="error"><?php echo $error ?></div><br><br>
-
-      <a href="index.php" class="account"><strong>login Here &gt;&gt;</strong></a> </p>
+     </form>
+     <div style="color:red;" class="error"><?php echo $error ?></div>
+           
+               
      </div></td>
 <td width="380" height="100" valign="top" class="tab"><img src="images/y1.jpg" align="left"><img src="images/y2.jpg" align="right">
 <div class="blok">Registration<br>
 <img src="images/line1.jpg" class="line" width="300" height="2"><br>
 <H2 style="display:inline;">REGISTRATION STEP 1</H2>
 <H2 style="display:inline;">&nbsp;</H2>
+Account Information<BR>
 <BR>
+Setting up an account is fast and simple. In a few steps you&rsquo;re ready to take full advantage of the online subscription services: <BR>
 <BR>
-Setting up an account is fast and simple. </div></td>
+<UL>
+  <LI>Make payments</LI>
+  <LI>Start a new subscription</LI>
+  <LI>Setup vacation holds</LI>
+  <LI>Access the e-edition (digital newspaper)</LI>
+  <LI>Submit delivery problems</LI>
+  <LI>Manage your subscriptions online</LI>
+</UL>
+</div>	</td>
   </tr>
 </table>
 	</td>
